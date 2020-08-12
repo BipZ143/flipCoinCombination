@@ -1,20 +1,18 @@
 #!/bin/bash -x
-declare -A tossOutCome
-numOfTosses=0
-numOfHeads=0
-numOfTails=0
-while [ $numOfTosses -lt 10]
+
+declare -A coinDictionary
+coinDictionary[Heads]=0
+coinDictionary[Tails]=0
+
+for (( i=0 ; i<10 ; i++ ))
 do
-	tossOutCome=$((RANDOM%2))
-	if [ $tossoutCome -eq 0 ]
+	coinFlip=$((RANDOM%2))
+	if [ $coinFlip -eq 0 ]
 	then
-		echo "Heads"
-		((numOfHeads++))
-		((numOfTosses++))
+		((coinDictionary[Heads]++))
 	else
-		echo "Tails"
-		((numOfTails++))
-		((numOfTosses++))
+		((coinDictionary[Tails]++))
 	fi
 done
-echo "Number of heads: $numOfHeads Number of tails: $numOfTails"
+echo "Percentage of heads is $((${coinDictionary[Heads]}*100/10))%"
+echo "Percentage of tails is $((${coinDictionary[Tails]}*100/10))%"
